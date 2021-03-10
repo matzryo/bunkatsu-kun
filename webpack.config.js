@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const glob = require('glob');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // productionかdevelopmentを指定する
 // npm scriptでの指定が優先される。
@@ -27,7 +28,7 @@ module.exports = {
   // ページごとに違いが出てしまった場合、バンドルしたJSを作成する。
   entry: { ...entries },
   output: {
-      // dist/bundle.jsに出力
+      // 分割して出力
       path: path.resolve(__dirname, 'dist'),
       filename: '[name].bundle.js',
   },
@@ -84,6 +85,12 @@ module.exports = {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: "app.css",
+    }),
+    // バンドル結果を参照するHTMLを生成する
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'src', 'html', 'index.html'),
+      filename: path.join(__dirname, 'dist', 'index.html'),
+      scriptLoading: 'defer',
     }),
   ],
   devtool: "source-map",
