@@ -1,7 +1,9 @@
 // > 最新版のBabelでは@babel/polyfillではなく、core-jsを利用する方法を推奨されています。しかし、2020年1月現在、core-jsを組み込む方法は注意する点が多くあります（特にIE11で利用可能にするのは難しい）
 // > https://ics.media/entry/16028/#webpack-babel-esnext
 import "@babel/polyfill";
+import { saveAs } from 'file-saver';
 import { jsPDF } from "jspdf";
+import JSZip from "jszip";
 
 document.addEventListener("DOMContentLoaded", () => { 
     const input = document.getElementById('original') as HTMLInputElement;
@@ -52,6 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     // pdfの場合
                     // 一度canvasに描画、それをPDFに挿入する
 
+                    // オプションでunit: 'px'も指定可能だが、446px * 631pxと画質が荒くなるのでmmで運用する
                     const pdf = new jsPDF();
                     const a4PageWidthMm = pdf.internal.pageSize.getWidth();
                     const a4PageHeightMm = pdf.internal.pageSize.getHeight();
@@ -90,6 +93,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 } else {
                     ctx.canvas.width = width;
                     ctx.canvas.height = pageHeight;
+                    const zip = new JSZip();
+
                     // jpeg, pngの場合
                     for (let i = 0; i < numberOfPages; i++) {
                         let sx = 0;
@@ -104,15 +109,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         const aDownloadLink = document.createElement('a');
 
+                        let filename = `${filenameWithoutExtension}_a4_part${i+1}.${mime.split('/')[1]}`
+
+                        // pngの場合、toDataURLのencoderOptions指定は無意味?
+                        // data urlの、頭の"data:image/jpeg;base64"の文字列を取りさる
+                        const base64Image =  canvas.toDataURL(mime, 1).split(',')[1];
+
+                        zip.file(filename, base64Image, {base64: true})
+
                         // ダウンロードさせる
-                        aDownloadLink.download = `${filenameWithoutExtension}_a4_part${i+1}.${mime.split('/')[1]}`;
-                        // pngの場合encoderOptions指定は無意味
-                        aDownloadLink.href = canvas.toDataURL(mime, 1);
-                        aDownloadLink.click()
 
                         // 不要になった描画内容を消さないと、最終ページの余白部分にひとつ前のページの内容が出てしまう
                         ctx.clearRect(0, 0, width, pageHeight);
                     }
+                    // ダウンロードさせる
+                    if (!JSZip.support.blob) {
+                        // 基本ここにはこない。
+                        // https://developer.mozilla.org/en-US/docs/Web/API/Blob#browser_compatibility
+                        alert('すみません、あなたがお使いのブラウザはサポート外です。')
+                        return;
+                    }
+
+                    // zipファイルダウンロード
+                    zip.generateAsync({type: "blob"})
+                    .then(function (content) {
+                        saveAs(content, "hello.zip");
+                    });
                 }
             }
         }
