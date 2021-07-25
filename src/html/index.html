@@ -9,10 +9,24 @@
     <h1>分割くん</h1>
 
     <p>
-        分割しちゃうよ
+        分割後のファイル形式の希望:
     </p>
-    
-    <input type="file" name="original" id="original">
+    <div>
+        <input type="radio" name="mime" id="pdf" value="application/pdf" checked>
+        <label for="pdf">pdf</label>
+    </div>
+    <div>
+        <input type="radio" name="mime" id="jpeg" value="image/jpeg">
+        <label for="jpeg">jpg</label>
+    </div>
+    <div>
+        <input type="radio" name="mime" id="png" value="image/png">
+        <label for="png">png</label>
+    </div>
 
+    <p>
+        分割したいファイル(jpg, jpeg, png):
+    </p>
+    <input type="file" name="original" id="original" accept="image/png, image/jpeg">
 </body>
 </html>
