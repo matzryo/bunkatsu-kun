@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     // ctx.drawImage(image, 0, 0, width, height, 0, 0, a4PageWidthPx, height * (a4PageWidthPx / width));
                     // const imageBase64 = canvas.toDataURL('image/jpeg', 1);
                     
-                    pdf.save(`${filenameWithoutExtension}_a4.${mime.split('/')[1]}`);
+                    pdf.save(`${filenameWithoutExtension}_a4_split.${mime.split('/')[1]}`);
                 } else {
                     ctx.canvas.width = width;
                     ctx.canvas.height = pageHeight;
@@ -131,9 +131,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
 
                     // zipファイルダウンロード
+                    const zipFilename = `${filenameWithoutExtension}_a4_split.zip`
                     zip.generateAsync({type: "blob"})
                     .then(function (content) {
-                        saveAs(content, "hello.zip");
+                        saveAs(content, zipFilename);
                     });
                 }
             }
