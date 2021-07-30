@@ -1,5 +1,5 @@
 import JSZip from "jszip";
-import ImagePager from "./ImagePager";
+import { ImagePager } from "./ImagePager";
 import { ZipMimeType } from "./MimeType";
 import { saveAs } from 'file-saver';
 
@@ -44,3 +44,5 @@ export default class ZipResultObjectGenerator {
         return this.mimeType.split('/')[1];
     }
 }
+
+export { ZipResultObjectGenerator };

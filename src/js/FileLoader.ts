@@ -1,4 +1,4 @@
-export default class FileLoader {
+class FileLoader {
     // 素朴にImagePager.constructor内でFileの中身を読み込みたくなる。しかしそうすると非同期処理になる。コード上後にくる処理(例: PdfResultObjectGenerator.generate)が先に実行されしまう懸念がある。
     static async load(sourceImage: File) {
         const filereader = await FileLoader.fileReaderLoad(sourceImage).catch((e) => {throw e});
@@ -24,3 +24,5 @@ export default class FileLoader {
         })
     }
 }
+
+export { FileLoader };

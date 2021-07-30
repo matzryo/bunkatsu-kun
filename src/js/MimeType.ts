@@ -1,3 +1,5 @@
-export type PdfMimeType = 'application/pdf';
-export type ZipMimeType = 'image/jpeg' | 'image/png';
-export type MimeType = PdfMimeType | ZipMimeType;
+type PdfMimeType = 'application/pdf';
+type ZipMimeType = 'image/jpeg' | 'image/png';
+type MimeType = PdfMimeType | ZipMimeType;
+
+export { PdfMimeType, ZipMimeType, MimeType };

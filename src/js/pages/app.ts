@@ -1,9 +1,9 @@
 // > 最新版のBabelでは@babel/polyfillではなく、core-jsを利用する方法を推奨されています。しかし、2020年1月現在、core-jsを組み込む方法は注意する点が多くあります（特にIE11で利用可能にするのは難しい）
 // > https://ics.media/entry/16028/#webpack-babel-esnext
 import "@babel/polyfill";
-import FileLoader from "../FileLoader";
+import { FileLoader } from "../FileLoader";
 import { MimeType } from '../MimeType';
-import ResultObjectGeneratorFactory from '../ResultObjectGeneratorFactory';
+import { ResultObjectGeneratorFactory } from '../ResultObjectGeneratorFactory';
 
 let image: HTMLImageElement | undefined;
 let filenameWithoutExtension: string | undefined;

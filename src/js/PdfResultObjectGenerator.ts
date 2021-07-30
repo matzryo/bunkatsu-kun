@@ -1,9 +1,9 @@
 import jsPDF from "jspdf";
-import ImagePager from "./ImagePager";
-import ResultObjectGenerator from "./ResultObjectGenerator";
+import { ImagePager } from "./ImagePager";
+import { ResultObjectGenerator } from "./ResultObjectGenerator";
 import { PdfMimeType } from "./MimeType";
 
-export default class PdfResultObjectGenerator implements ResultObjectGenerator {
+class PdfResultObjectGenerator implements ResultObjectGenerator {
     // 1 mm = 3.779528 px
     static readonly MM_PX_RATIO = 3.779528;
     private pdf = new jsPDF();
@@ -37,3 +37,5 @@ export default class PdfResultObjectGenerator implements ResultObjectGenerator {
     }
 
 }
+
+export { PdfResultObjectGenerator };

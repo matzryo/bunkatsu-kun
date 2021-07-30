@@ -1,4 +1,4 @@
-export default class ImagePager {
+class ImagePager {
     // A4: W210mm x H297mm
     static readonly ASPECT_RATIO = 297 / 210;
     private numberOfPages = 1;
@@ -53,3 +53,5 @@ export default class ImagePager {
         return;
     }
 }
+
+export {ImagePager};

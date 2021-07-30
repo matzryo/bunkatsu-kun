@@ -1,3 +1,5 @@
-export default interface ResultObjectGenerator {
+interface ResultObjectGenerator {
     generate(prefix: string): void
 }
+
+export { ResultObjectGenerator };

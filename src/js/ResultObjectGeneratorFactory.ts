@@ -1,8 +1,8 @@
-import PdfResultObjectGenerator from "./PdfResultObjectGenerator";
-import ZipResultObjectGenerator from "./ZipResultObjectGenerator";
+import { PdfResultObjectGenerator } from "./PdfResultObjectGenerator";
+import { ZipResultObjectGenerator } from "./ZipResultObjectGenerator";
 import { PdfMimeType, ZipMimeType, MimeType } from "./MimeType";
 
-export default class ResultObjectGeneratorFactory {
+class ResultObjectGeneratorFactory {
     static readonly PDF_MIME_TYPES = ['application/pdf'];
     static readonly ZIP_MIME_TYPES = ['image/jpeg', 'image/png'];
 
@@ -15,3 +15,5 @@ export default class ResultObjectGeneratorFactory {
         throw new Error(`Mime type is not supported. Only pdf, jpeg and png are suported. Your file mime type is: ${mimeType}`);
     }
 }
+
+export { ResultObjectGeneratorFactory };
