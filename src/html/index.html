@@ -1,32 +1,51 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>分割くん</title>
 </head>
+
 <body>
     <h1>分割くん</h1>
 
-    <p>
-        分割後のファイル形式の希望:
-    </p>
-    <div>
-        <input type="radio" name="mime" id="pdf" value="application/pdf" checked>
-        <label for="pdf">pdf</label>
-    </div>
-    <div>
-        <input type="radio" name="mime" id="jpeg" value="image/jpeg">
-        <label for="jpeg">jpg</label>
-    </div>
-    <div>
-        <input type="radio" name="mime" id="png" value="image/png">
-        <label for="png">png</label>
-    </div>
+    <form id="form">
+        <p>
+            <label for="original">
+                分割したいファイル(jpg, jpeg, png):
+            </label>
+            <input type="file" name="original" id="original" accept="image/png, image/jpeg" required>
+        </p>
 
-    <p>
-        分割したいファイル(jpg, jpeg, png):
-    </p>
-    <input type="file" name="original" id="original" accept="image/png, image/jpeg">
+        <p>
+        <fieldset>
+            <legend>
+                分割後のファイル形式の希望:
+            </legend>
+            <div>
+                <input type="radio" name="mime" id="pdf" value="application/pdf" checked>
+                <label for="pdf">pdf</label>
+            </div>
+            <div>
+                <input type="radio" name="mime" id="jpeg" value="image/jpeg">
+                <label for="jpeg">jpg</label>
+            </div>
+            <div>
+                <input type="radio" name="mime" id="png" value="image/png">
+                <label for="png">png</label>
+            </div>
+
+        </fieldset>
+        </p>
+
+        <p>
+            <button type="submit" id="download">分割する</button>
+        </p>
+
+    </form>
+
+    <p>version 0.03</p>
 </body>
+
 </html>
