@@ -41,7 +41,17 @@ export default class ZipResultObjectGenerator {
     }
 
     private getExtension() {
-        return this.mimeType.split('/')[1];
+        let extenstion = this.mimeType.split('/')[1];
+
+        // MIME typeとしてはjpegが正式名称。
+        // 拡張子としてはjpg表記の方が広く流通している。
+        // Acrobatではファイルの直接変換ができるのはjpg表記のみなど、利便性に差が出る懸念すらある。
+        // 出力する拡張子としてはjpg表記を採用する。
+        if (extenstion === 'jpeg') {
+            extenstion = 'jpg';
+        }
+
+        return extenstion;
     }
 }
 
